@@ -2,10 +2,13 @@
 
 namespace App\Models\MasterFiles;
 
+use App\Traits\LogsActivity;
 use Illuminate\Database\Eloquent\Model;
 
 class SiteLocations extends Model
 {
+    use LogsActivity;
+    
     protected $table = 'company_locations';
 
     protected $primaryKey = 'id';

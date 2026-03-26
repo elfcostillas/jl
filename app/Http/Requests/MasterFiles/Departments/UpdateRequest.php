@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id' => 'required|exists:departments,id',
+            'dept_code' => 'required|unique:departments,dept_code,'. $this->input('id'),
+            'dept_name' => 'required|unique:departments,dept_name,'. $this->input('id')
+
         ];
     }
 }

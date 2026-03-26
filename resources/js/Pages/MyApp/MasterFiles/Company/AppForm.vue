@@ -48,7 +48,7 @@
             company_shortname : props.selectedCompany?.company_shortname ?? null, 
         };
 
-        console.log(form.value);
+        // console.log(form.value);
     });
 
     const props = defineProps([

@@ -11,7 +11,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,11 @@ class CreateRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+        return [    
+            'company_id' => 'required|exists:companies,id',    
+            'location_name' => 'required|string|max:255',    
+            'location_address' => 'required|string|max:255',    
+            'location_status' => 'required|string|max:255',    
         ];
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\MasterFiles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MasterFiles\SiteLocations\CreateRequest;
+use App\Http\Requests\MasterFiles\SiteLocations\UpdateRequest;
 use App\Service\MasterFiles\CompanyService;
 use App\Service\MasterFiles\SiteLocationsService;
 use Illuminate\Http\Request;
@@ -27,4 +29,34 @@ class SiteLocationsController extends Controller
             'sites' => $sites
         ]);
     }   
+
+    public function create(CreateRequest $request)
+    {
+        $validated = $request->validated();
+
+        $result = $this->siteLocationsService->create($validated);
+
+        if ($result instanceof \Throwable) {
+            return response()->json([
+                'message' => $result->getMessage()
+            ], 500);
+        }
+
+        return response()->json(['message' => 'Site Location created successfully']); 
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        $validated = $request->validated();
+
+        $result = $this->siteLocationsService->update($validated);
+
+        if ($result instanceof \Throwable) {
+            return response()->json([
+                'message' => $result->getMessage()
+            ], 500);
+        }
+
+        return response()->json(['message' => 'Site Location updated successfully']); 
+    }
 }

@@ -135,7 +135,7 @@
                 .catch(error => {
                     let message = '';
 
-                    console.log(error.response.data.errors);
+                    // console.log(error.response.data.errors);
 
                     Object.keys(error.response.data.errors).forEach(field => {
                         error.response.data.errors[field].forEach(msg => {

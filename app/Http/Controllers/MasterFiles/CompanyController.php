@@ -25,6 +25,7 @@ class CompanyController extends Controller
             'company' => $company
         ]);
     }
+    
     public function create(CreateRequest $request)
     {
         $validated = $request->validated();
