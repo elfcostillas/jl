@@ -1,1 +1,0 @@
-import{z as t}from"./app-CFquxl56.js";t.defaults.withCredentials=!0;t.defaults.withXSRFToken=!0;const s=t.create({baseURL:"/api"}),n=async(e,o)=>{try{return await s.post(e,o)}catch(r){throw console.error("Error occurred while posting data:",r),r}};export{n as p};

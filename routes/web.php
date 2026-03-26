@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\MasterFile\VehicleController;
-
+use App\Http\Controllers\MasterFiles\CompanyController;
+use App\Http\Controllers\MasterFiles\DepartmentsController;
+use App\Http\Controllers\MasterFiles\EmployeesController;
+use App\Http\Controllers\MasterFiles\JobTitlesController;
+use App\Http\Controllers\MasterFiles\SiteLocationsController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -32,7 +36,11 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('master-files')->group(function(){
-   
+    Route::get('company',[CompanyController::class, 'index'])->name('company.index');
+    Route::get('site-locations',[SiteLocationsController::class, 'index'])->name('site-locations.index');
+    Route::get('departments',[DepartmentsController::class, 'index'])->name('departments.index');
+    Route::get('job-titles',[JobTitlesController::class, 'index'])->name('job-titles.index');
+    Route::get('employees   ',[EmployeesController::class, 'index'])->name('employees.index');
 })->middleware(['auth', 'web']);
 
 
