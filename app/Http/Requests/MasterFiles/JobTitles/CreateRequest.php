@@ -11,7 +11,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'dept_id' => 'required|exists:departments,id',
+            'job_title_code' => 'required|string|max:255',
+            'job_title_name' => 'required|string|max:255',
         ];
     }
 }

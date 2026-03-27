@@ -48,6 +48,9 @@
     import { useConfirm } from 'primevue';
     import { useToast } from "primevue/usetoast";
 
+    import useConfirmSave from '@/composables/useConfirmSave.js';
+    const { confirmAndSave } = useConfirmSave();
+
     const selectedDepartment = ref();
     const isVisible = ref(false);
     const loading = ref(false);
@@ -106,61 +109,20 @@
     ]);
 
     const save = async (formData) => {
-        confirmDialog.require({
-            message: 'Are you sure you want to proceed?',
-            header: 'Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            rejectProps: {
-                label: 'Cancel',
-                severity: 'secondary',
-                outlined: true
-            },
-            acceptProps: {
-                label: 'Save',
-                icon : 'pi pi-save',
-                
-            },
-            accept: async () => {
-
-                let mode = formData.id === null ? 'create' : 'update';
-            
-                await postFN(`/master-files/departments/${mode}`, formData)
-                .then(response => {
-                    toast.add({ severity: 'success', summary: 'Success', detail: response.data.message, life: 3000 });
-                    // isVisible.value = false;
-
-                    router.reload({
-                        only: ['departments'],
-                        preserveScroll: true,
-                        preserveState: true
-                    });
-
-                    return response;
-
-                })
-                .catch(error => {
-                    let message = '';
-
-                    // console.log(error.response.data.errors);
-
-                    Object.keys(error.response.data.errors).forEach(field => {
-                        error.response.data.errors[field].forEach(msg => {
-                            message += `${msg}\n`;
-                        })
-                    });
-
-                    toast.add({ severity: 'error', summary: 'Error', detail: message || 'An error occurred', life: 3000 });
+        console.log(formData);
+        confirmAndSave({
+            data : formData,
+            url: `/master-files/departments/${formData.id ? 'update' : 'create'}`,
+            onSuccess: () => {
+                router.reload({
+                    only: ['departments'],
+                    preserveScroll: true,
+                    preserveState: true
                 });
-
-                // toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
             },
-            reject: () => {
-                toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-            }
+            
         });
     };
-
-
     
 </script>
 

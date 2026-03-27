@@ -61,6 +61,9 @@
     import { useConfirm } from 'primevue';
     import { useToast } from "primevue/usetoast";
 
+    import useConfirmSave from '@/composables/useConfirmSave.js';
+    const { confirmAndSave } = useConfirmSave();
+
     /* Listbox data*/
     const listboxItems = computed(() => {
         return props.company || [];
@@ -119,7 +122,7 @@
 
     const create = () => {
         selectedSiteLocation.value = {
-           id : null,
+            id : null,
             company_id : null,
             location_name : null,
             location_address : null,
@@ -144,62 +147,20 @@
     ]);
 
     const save = async (formData) => {
-        confirmDialog.require({
-            message: 'Are you sure you want to proceed?',
-            header: 'Confirmation',
-            icon: 'pi pi-exclamation-triangle',
-            rejectProps: {
-                label: 'Cancel',
-                severity: 'secondary',
-                outlined: true
-            },
-            acceptProps: {
-                label: 'Save',
-                icon : 'pi pi-save',
-                
-            },
-            accept: async () => {
-
-                let mode = formData.id === null ? 'create' : 'update';
-            
-                await postFN(`/master-files/site-locations/${mode}`, formData)
-                .then(response => {
-                    toast.add({ severity: 'success', summary: 'Success', detail: response.data.message, life: 3000 });
-                    // isVisible.value = false;
-
-                    router.reload({
-                        only: ['sites'],
-                        preserveScroll: true,
-                        preserveState: true
-                    });
-
-                    return response;
-
-                })
-                .catch(error => {
-                    let message = '';
-
-                    // console.log(error.response.data.errors);
-
-                    Object.keys(error.response.data.errors).forEach(field => {
-                        error.response.data.errors[field].forEach(msg => {
-                            message += `${msg}\n`;
-                        })
-                    });
-
-                    toast.add({ severity: 'error', summary: 'Error', detail: message || 'An error occurred', life: 3000 });
+        console.log(formData);
+        confirmAndSave({
+            data : formData,
+            url: `/master-files/site-locations/${formData.id ? 'update' : 'create'}`,
+            onSuccess: () => {
+                router.reload({
+                    only: ['sites'],
+                    preserveScroll: true,
+                    preserveState: true
                 });
-
-                // toast.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
             },
-            reject: () => {
-                toast.add({ severity: 'error', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-            }
+            
         });
     };
-
-
-
 
 </script>
 

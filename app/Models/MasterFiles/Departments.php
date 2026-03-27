@@ -20,4 +20,9 @@ class Departments extends Model
     ];
     
     public $timestamps = false;
+
+    public function jobTitles()
+    {
+        return $this->hasMany(JobTitle::class, 'dept_id');
+    }
 }
