@@ -34,6 +34,7 @@ import { Select } from 'primevue';
 import { InputNumber } from 'primevue';
 import { Menu } from 'primevue';
 import { Card } from 'primevue';
+import { Fieldset} from 'primevue';
 
 import { createPinia } from 'pinia';
 
@@ -72,6 +73,7 @@ createInertiaApp({
             .component('Select', Select)
             .component('InputNumber', InputNumber)
             .component('Menu', Menu)
+            .component('Fieldset', Fieldset)
 
             .use(ToastService)
             .use(ConfirmationService)

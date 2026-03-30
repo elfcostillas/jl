@@ -27,4 +27,9 @@ class Company extends Model
     {
         return $this->hasMany(SiteLocations::class, 'company_id');
     }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'company_id');
+    }
 }

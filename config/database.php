@@ -66,8 +66,8 @@ return [
         'mariadb_local' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
-            'host' => env('DB_HOST', '172.24.224.1'),
-            // 'host' => env('DB_HOST', '172.31.64.1'),
+            // 'host' => env('DB_HOST', '172.24.224.1'),
+            'host' => env('DB_HOST', '172.31.64.1'),
             'port' => env('DB_PORT', '3307'),
             'database' => env('DB_DATABASE', 'jl_db'),
             'username' => env('DB_USERNAME', 'elmer'),

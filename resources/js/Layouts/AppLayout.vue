@@ -42,4 +42,9 @@ body {
     background-color: #e7e4c9;
 }
 
+* {
+    font-size: 10pt;
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+}
+
 </style>

@@ -26,4 +26,9 @@ class SiteLocations extends Model
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class, 'location_id');
+    }
 }
