@@ -35,6 +35,10 @@
                     <AppForm 
                         :selectedEmployee="selectedEmployee"
                         :boolean_options="props.boolean_options"
+                        :employee_statuses="props.employee_statuses"
+                        :civil_status="props.civil_status"
+                        :company="props.company"
+
                         @save="save"
                         @companyChange="companyChange"
                         @departmentChange="departmentChange"
@@ -42,6 +46,12 @@
                     <ConfirmDialog></ConfirmDialog>
                     <Toast></Toast>
                 </Dialog>
+            </template>
+            <template #footer>
+                <p>
+                {{ props.civil_status }}
+                {{ props.company }}
+                </p>
             </template>
         </AppLayout>
     </div>
@@ -126,7 +136,10 @@
     const props = defineProps([
         'company',
         'employees',
-        'boolean_options'
+        'boolean_options',
+        'employee_statuses',
+        'civil_status',
+        'company'
     ]);
 
     const cols = ref([

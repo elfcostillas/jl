@@ -22,12 +22,13 @@ class EmployeesController extends Controller
         $company_filter = ($request->input('company_search')) ? $request->input('company_search') : 0;
         $employees = $this->employeesService->getEmployeesByCompany($company_filter);
         // $company = $this->companyService->getAll();
+        $dept_search = ($request->input('dept_search')) ? $request->input('dept_search') : 0;
 
         $civil_status = $this->employeeOptionsRepository->getCivilStatuses();
         $companies = $this->employeeOptionsRepository->getCompanies();
         $departments = $this->employeeOptionsRepository->getDepartments();
         $locations = $this->employeeOptionsRepository->getLocations();
-        $job_titles = $this->employeeOptionsRepository->getJobTitles();
+        $job_titles = $this->employeeOptionsRepository->getJobTitles($dept_search);
         $exit_statuses = $this->employeeOptionsRepository->getExitStatuses();
         $employee_statuses = $this->employeeOptionsRepository->getEmployeeStatuses();
         $employee_types = $this->employeeOptionsRepository->getEmployeeTypes();             

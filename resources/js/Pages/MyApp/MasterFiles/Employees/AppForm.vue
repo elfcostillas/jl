@@ -75,7 +75,7 @@
             <div class="grid grid-cols-4 gap-3 m-2">
                 <div>
                     <label for="company_id" class="block text-gray-700">Company</label>
-                    <Select v-model="form.company_id" id="company_id" class=" w-full" />
+                    <Select v-model="form.company_id" id="company_id" class=" w-full" :options="company" optionLabel="company_name" optionValue="id" />
                 </div>
                 <div>
                     <label for="location_id" class="block text-gray-700">Location</label>
@@ -91,7 +91,7 @@
                 </div>
                 <div>
                     <label for="employee_status" class="block text-gray-700">Employement Status</label>
-                    <Select v-model="form.employee_status" id="employee_status" class=" w-full" />
+                    <Select v-model="form.employee_status" id="employee_status" :options="employee_statuses" optionLabel="estatus_desc" optionValue="id" class=" w-full" />
                 </div>
                 <div>
                     <label for="emp_level" class="block text-gray-700">Employee Level</label>
@@ -255,7 +255,10 @@
 
     const props = defineProps([
         'selectedEmployee',
-        'boolean_options'
+        'boolean_options',
+        'employee_statuses',
+        'civil_status',
+        'company'
         // 'company',
         // 'location',
         // 'department',
